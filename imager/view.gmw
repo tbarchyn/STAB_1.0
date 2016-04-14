@@ -1,0 +1,19 @@
+GLOBAL_MAPPER_SCRIPT VERSION="1.00" FILENAME="C:\Users\tom\Dropbox\MGD\1.3\imager\save.gmw"
+UNLOAD_ALL
+DEFINE_PROJ PROJ_NAME="UTM_ZONE-60_WGS84"
+Projection     UTM
+Datum          WGS84
+Zunits         NO
+Units          METERS
+Zone           -60
+Xshift         0.000000
+Yshift         0.000000
+Parameters
+END_DEFINE_PROJ
+
+
+
+IMPORT FILENAME="surf.asc" TYPE="ARCASCIIGRID" \
+	 PROJ_NAME="UTM_ZONE-60_WGS84" ANTI_ALIAS="YES" ELEV_UNITS="METERS" SHADER_NAME="Default Shared Shader"
+     
+     
