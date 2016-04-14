@@ -1,5 +1,5 @@
 # STAB_1.0
-Subglacial Till Advection and Bedfroms (STAB)
+Subglacial Till Advection and Bedforms (STAB)
 
 This model simulates sediment advection under glaciers.
 
