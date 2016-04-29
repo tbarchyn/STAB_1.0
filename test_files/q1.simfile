@@ -1,0 +1,75 @@
+SIMFILE - configuration file to run the STAB model - revision 1.0
+--------------------------------------------------------------------------------
+Model space parameters
+> ydim 50
+> xdim 100
+> cellsize 10.0
+> yll_corner 0.0
+> xll_corner 0.0
+
+--------------------------------------------------------------------------------
+Time parameters
+> max_iterations 20000
+> len_timestep 1e-2
+
+--------------------------------------------------------------------------------
+Glacial properties
+> global_basal_pres 5000000.0
+> viscosity 3.17e6
+> Q_advection_global 2e-06
+> Q_advection_stochasticity 0.1
+> Q_squish_coef 1e-05
+> ice_advection 150.0
+
+--------------------------------------------------------------------------------
+Entrainment properties
+> entrainment_cavity -1.5
+> entrainment_zero -1.5
+> entrainment_slp_1 3e-07
+> entrainment_vtx_2 5000000.0
+> entrainment_slp_2 2.25e-07
+
+--------------------------------------------------------------------------------
+Basement erosion properties;
+> abrasion_from_N_slope 0.0
+> abrasion_from_N_zero 0.0
+> abrasion_from_iceload 0.0
+> global_bsmt_erodibility 1.0
+> iceload_surf_return_fraction 0.0
+
+--------------------------------------------------------------------------------
+Sediment bleed properties
+> iceload_bleed 0.0
+> surf_bleed 0.0
+
+--------------------------------------------------------------------------------
+R parameters for running R scripts
+> Rscript_path Rscript
+> progress_utility_name R_main.R
+> on_the_fly_progress_updates no
+
+--------------------------------------------------------------------------------
+Boundaries
+> boundaries_ns periodic
+> boundaries_ew periodic
+
+--------------------------------------------------------------------------------
+Interim output options
+> interim_file_output_interval 1000
+> file_output_prefix t
+
+--------------------------------------------------------------------------------
+Initialization parameters (note existing files must match dimensions set above)
+> init_type flat
+> flat_init_basement_elev 0.0
+> flat_init_sedfill_elev 5.0
+> init_iceload 0.0
+> init_erodibility 1.0
+> existing_surf_file NA
+> existing_bsmt_file NA
+> existing_erodibility_file NA
+
+
+
+
+
