@@ -30,7 +30,7 @@ Entrainment properties
 > entrainment_slp_2 2.25e-07
 
 --------------------------------------------------------------------------------
-Basement erosion properties;
+Basement erosion properties
 > abrasion_from_N_slope 0.0
 > abrasion_from_N_zero 0.0
 > abrasion_from_iceload 0.0

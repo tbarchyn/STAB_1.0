@@ -96,12 +96,15 @@ process_all <- function () {
     surf_list_split <- strsplit (surf_list, '[.]')
     
     for (i in surf_list_split) {
-        # get the iteration
-        temp_split_1 <- strsplit (i[1], '_')
-        temp_split_2 <- temp_split_1[[1]]
-        iter <- temp_split_2[length(temp_split_2)]
-        print (paste ('analysing iteration:', iter))
-        process_file (iter)
+        # first make sure that we only process ascii files
+        if (i[2] == 'asc') {
+            # get the iteration
+            temp_split_1 <- strsplit (i[1], '_')
+            temp_split_2 <- temp_split_1[[1]]
+            iter <- temp_split_2[length(temp_split_2)]
+            print (paste ('analysing iteration:', iter))
+            process_file (iter)
+        }
     }
 }
 

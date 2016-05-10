@@ -1,0 +1,159 @@
+STAB revision 1.0 parameter key
+
+Notes: each parameter can be modified by modifying the number behind the tagword. The tagword is the parameter name
+behind the > symbol. When the file is read into the program, it searches for the tagword, then reads the text immediately
+following. You can write things in your simfiles, but do not write the tagword, otherwise the program will get confused
+and attempt to read whatever text follows as the value for the parameter. Best case it will crash, worse case it will
+press forward with the wrong value.
+
+Example:
+> xdim 100
+You can modify the 100 to 200 if you like. This changes the number of cells in the x dimension.
+
+Note the types of values each parameter is, such that integers are only specified integer values, etc. Do not try to
+Give a double xdim for example because this makes little sense and may crash the program.
+
+Note that some of the names used here are different than in the paper. For example, Q_advection is labeled
+as Q[dflow] in the paper. Q_squish here is Q[lat] in the paper. The flux control parameters are similarly different.
+
+Please contact me (tbarchyn@gmail.com) if you have questions or I have left out some key piece of information. If
+you would like to replicate the simulations in the paper, please contact me and I can send you a link to download
+the simfiles.
+
+--------------------------------------------------------------------------------
+Model space parameters
+xdim = the x dimensions of the model space, in cells. Integer.
+ydim = the y dimensions of the model space, in cells. Integer.
+cellsize = the cellsize of the model space. Double. m.
+yll_corner = the y lower left corner. Double. m.
+xll_corner = the x lower left corner. Double. m.
+
+--------------------------------------------------------------------------------
+Time parameters
+max_iterations = the number of iterations. Integer.
+len_timestep = the length of the time for each iteration. Double. yr.
+
+--------------------------------------------------------------------------------
+Glacial properties
+global_basal_pres = this is P[ice] - P[water] in the paper. Double. Pa.
+viscosity = ice viscosity, Nu in the paper. Double. Pa yr.
+Q_advection_global = the flux control parameter, k in the paper. Double. m^3 m^-1 yr^-1 Pa^-1.
+Q_advection_stochasticity = the flux stochasticity, constant at 0.1 in the paper. Double.
+Q_squish_coef = the lateral flux control parameter, j in the paper. Double. m^3 m^-1 yr^-1 per Pa m^-1.
+ice_advection = the ice speed. Double. m yr^-1.
+
+--------------------------------------------------------------------------------
+Entrainment properties (this is labeled as E in the paper)
+entrainment_cavity = this defines the entrainment rate in a cavity, where the basal pres is
+  equal to zero. Double. m yr^-1.
+entrainment_zero = this defines the entrainment rate in a location where the basal pres is
+  equal to zero or infinitessimally greater than zero. Double. m yr^-1.
+entrainment_slp_1 = this defines the increase in entrainment rate with increasing basal pres
+  from zero to entrainment_vtx_2. Double.
+entrainment_vtx_2 = this defines pressure at the vertex anchoring the second part of the curve from here
+  to positive infinity. The entrainment here is defined by entrainment_slp_1 * entrainment_vtx_2 + entrainment_zero.
+  Double. m yr^-1.
+entrainment_slp_2 = this defines the slope from entrainment_vtx_2 to infinity. Double.
+
+--------------------------------------------------------------------------------
+Basement erosion properties (these are experimental and not used in the paper) see Stab::erode_basement method
+abrasion_from_N_slope = this defines the basement erosion as a function of P[ice]. Double.
+abrasion_from_N_zero = this controls the basement erosion at P[ice] == 0.0. Double.
+abrasion_from_iceload = this controls iceload based basement erosion, set at 0.0. Double.
+global_bsmt_erodibility = this defines the basement erodibility. Double.
+iceload_surf_return_fraction = this defines the fraction of eroded basement to return to the iceload. Double.
+
+--------------------------------------------------------------------------------
+Sediment bleed properties (these are 0.0 in the paper)
+iceload_bleed = this defines the bleed from the iceload. Double. m yr^-1.
+surf_bleed = this defines the bleed from the surface. Double. m yr^-1.
+
+--------------------------------------------------------------------------------
+R parameters for running R scripts
+Rscript_path = the path to your Rscript.exe on your computer. String.
+progress_utility_name = R_main.R, this is the R file to call in analysis. String.
+on_the_fly_progress_updates = no, make images at every interim file output ('yes'), or at the end ('no'). String.
+
+--------------------------------------------------------------------------------
+Boundaries
+boundaries_ns = periodic, 'periodic' or 'nonperiodic' in north south direction. String.
+boundaries_ew = periodic, 'periodic' or 'nonperiodic' in east west direction. String.
+
+--------------------------------------------------------------------------------
+Interim output options
+interim_file_output_interval = the interval of interim file outputs, in iterations. Integer. iterations.
+file_output_prefix = the prefix for file outputs, could be a path. String.
+
+--------------------------------------------------------------------------------
+Initialization parameters (note existing files must match dimensions set above)
+init_type = the initialization type - see stab::init method for options 'flat' is used in the paper. String.
+flat_init_basement_elev = the basement elevation in flat init type. Double. m.
+flat_init_sedfill_elev = the sediment depth to fill the model space in flat init type. Double. m.
+init_iceload = the initial iceload in the flat init type. Double. m.
+init_erodibility = the initial erodibility. Double. m.
+existing_surf_file = pre-existing surf file if using existing init types. Path.
+existing_bsmt_file = pre-existing basement file if using existing init types. Path.
+existing_erodibility_file = pre-existing erodibility file if using existing init types. Path.
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+R parameters for running R scripts
+Notes: this section defines where to call R and make images and plots and perform
+general post-run data analysis.
+
+Rscript_path = this is the path to the Rscript.exe program. If you have set your
+    'Path' environment variable to include the path to the directory that contains
+    Rscript.exe (recommended), you can just set this to Rscript. Else, you will need
+    to include the full path to Rscript.exe. On Linux computers, installing R usually
+    sets it up such that you can call Rscript with just 'Rscript'. Not sure about Macs.
+progress_utility_name = this is the name of the progress utility to call from STAB. String.
+    This could be changed to something different, check the file to get some ideas on
+    what could be done here to have simulation specific image outputs. String.
+on_the_fly_progress_updates = if this is 'yes', the progress utility is called every
+    time a file output occurs. Else, if this is 'no', it calls it only at the end. Set
+    this to 'yes' to see the simulation proceed as images will be produced every interim
+    output interval. Else, set to no to save some time as making all the images at once
+    is faster as the overhead of starting R and loading the libraries only occurs once. String.
+
+--------------------------------------------------------------------------------
+Boundaries
+boundaries_ns = 'periodic' or 'nonperiodic' for specifying boundaries in the north-south
+    direction. I have not tested 'nonperiodic' boundaries.
+boundaries_ew = 'periodic' or 'nonperiodic' for specifying boundaries in the east-west
+    direction. I have not tested 'nonperiodic' boundaries.
+
+--------------------------------------------------------------------------------
+Interim output options
+interim_file_output_interval = the interval of iterations to output files. Integer.
+file_output_prefix = the prefix of output files, this could be a path if you want
+    to put outputs somewhere else except local. String.
+
+--------------------------------------------------------------------------------
+Initialization
+init_type = this is the initialization type for the model space. There are some initializations
+    defined in the stab.hpp header file, but 'flat' is the only one really tested. String.
+flat_init_basement_elev = the elevation of the basement in zsc. Double.
+flat_init_sedfill_elev = the elevation to fill with sediment in zsc. Double.
+bumpify_multiplier = the bumpification of either surface or basement, see stab.hpp. Leave
+    at 0.0 unless you read the code and figure out what it does. Not real important, more
+    of a legacy feature. Double.
+init_iceload = the initial amount of iceload assigned to the iceload raster. Double.
+
+
+
+
+
+
+
+
+
+
+
+
