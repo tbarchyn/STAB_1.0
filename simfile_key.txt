@@ -35,7 +35,7 @@ len_timestep = the length of the time for each iteration. Double. yr.
 
 --------------------------------------------------------------------------------
 Glacial properties
-global_basal_pres = this is P[ice] - P[water] in the paper. Double. Pa.
+global_basal_pres = this is P[g] - P[w] in the paper. Double. Pa.
 viscosity = ice viscosity, Nu in the paper. Double. Pa yr.
 Q_advection_global = the flux control parameter, k in the paper. Double. m^3 m^-1 yr^-1 Pa^-1.
 Q_advection_stochasticity = the flux stochasticity, constant at 0.1 in the paper. Double.

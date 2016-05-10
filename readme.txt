@@ -43,7 +43,7 @@ and '3_finished'.
 
 The simfiles, which contain all the parameters for running the program, are placed into '1_pending'
 and then executed sequentially until there are none left. During simulation, the operations code
-assembles the requisite files, executes the simulation in'2_processing', then copies the simulation into the
+assembles the requisite files, executes the simulation in '2_processing', then copies the simulation into the
 '3_finished' directory. The worker then goes back and tries to find the next simfile. There can
 be many workers all working on the same queue of simfiles, running in parallel. The model cannot
 be parallelized that well because of all the sequential polling required - but you can run as many
