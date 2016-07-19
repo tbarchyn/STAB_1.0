@@ -9,6 +9,10 @@ This project was developed with input from Thomas P.F. Dowling,
 Chris R. Stokes, and Chris H. Hugenholtz. We would appreciate
 citation of the relavent publications.
 
+# Barchyn, T. E., T. P. F. Dowling, C. R. Stokes, and C. H. Hugenholtz (2016), 
+# Subglacial bed form morphology controlled by ice speed and sediment thickness,
+# Geophys. Res. Lett., 43, doi:10.1002/2016GL069558
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
