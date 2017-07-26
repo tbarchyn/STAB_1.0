@@ -124,6 +124,14 @@ def get_fresh_code ():
     
 # MAIN
 if __name__ == '__main__':
+    # try to make a bin directory if it doesn't exist
+    try:
+        if not os.path.isdir (core_repository):
+            os.mkdir (core_repository)
+            print ('made a core repository bin directory')
+    except:
+        pass
+    
     try:
         execfile (os.path.join (operations_localdir, 'operations.py'))
     except:
